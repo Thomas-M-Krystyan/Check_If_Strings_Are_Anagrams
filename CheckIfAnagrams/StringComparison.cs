@@ -6,14 +6,16 @@ namespace CheckIfAnagrams
 {
     public static class StringComparison
     {
-        public static bool CheckIfAnagrams(string firstTextData, string secondTextData)
+    // Longer and more complex algorithm
+    #region First algorithm
+        public static bool CheckIfAnagrams1(string firstTextData, string secondTextData)
         {
             // PREPARATIONS: Counting (letters in string) + sorting (achieved dictionary)
             Dictionary<char, int> firstTextDataResult = SortDictionaryByKeys(CountLetters(firstTextData));
             Dictionary<char, int> secondTextDataResult = SortDictionaryByKeys(CountLetters(secondTextData));
 
 
-            // CHECKING: Check if the output dictionaries are the same size
+            // CHECKING: Check if the output dictionaries have the same size
             if (firstTextDataResult.Count != secondTextDataResult.Count)
             {
                 return false;
@@ -68,5 +70,32 @@ namespace CheckIfAnagrams
         {
             return dictionary.OrderBy(pair => pair.Key).ToDictionary(pair => pair.Key, pair => pair.Value);
         }
+    #endregion
+
+    // Shorter and more optimised algorithm
+    #region Second algorithm
+        public static bool CheckIfAnagrams2(string firstTextData, string secondTextData)
+        {
+            // Check if both strings have the same size
+            if (firstTextData.Length != secondTextData.Length)
+            {
+                return false;
+            }
+
+            string tempSecondTextData = secondTextData.ToLower();
+            foreach (char letter in firstTextData.ToLower())
+            {
+                // Check if the second string contains the letter of the first string
+                if (tempSecondTextData.Contains(letter) == false)
+                {
+                    return false;
+                }
+                // Remove current letter from the string       Find the index of the first occurrence of a letter
+                tempSecondTextData = tempSecondTextData.Remove(tempSecondTextData.IndexOf(letter), 1);
+            }
+
+            return true;
+        }
+    #endregion
     }
 }

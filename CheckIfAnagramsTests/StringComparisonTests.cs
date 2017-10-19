@@ -10,40 +10,84 @@ namespace CheckIfAnagramsTests
         // Constants
         private const string FirstString = "Armageddon!";
 
-        [TestMethod()]
-        [DisplayName("Comparison of different strings")]
-        public void Test_IfComparisonOf_DifferentStrings_ReturnsFalse()
+        [TestClass()]
+        public class FirstAlgorithm : StringComparisonTests
         {
-            const string secondString = "Apocalypse";
+            [TestMethod()]
+            [DisplayName("Comparison of different strings")]
+            public void Test_IfComparisonOf_DifferentStrings_ReturnsFalse()
+            {
+                const string secondString = "Apocalypse";
 
-            Assert.IsFalse(StringComparison.CheckIfAnagrams(FirstString, secondString));
+                Assert.IsFalse(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
+
+            [TestMethod()]
+            [DisplayName("Comparison of the same strings: written backward")]
+            public void Test_IfComparisonOf_TheSameStrings_ButWrittenBackwards_ReturnsTrue()
+            {
+                const string secondString = "!noddegamrA";
+
+                Assert.IsTrue(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
+
+            [TestMethod()]
+            [DisplayName("Comparison of the same strings: rearranged letters")]
+            public void Test_IfComparisonOf_TheSameStrings_ButWithRearrangedLetters_ReturnsTrue()
+            {
+                const string secondString = "dnarde!mAog";
+
+                Assert.IsTrue(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
+
+            [TestMethod()]
+            [DisplayName("Comparison of the same strings: case insensitive")]
+            public void Test_IfComparisonOf_TheSameStrings_ButWithDifferentCaseSensitiveLetters_ReturnsTrue()
+            {
+                const string secondString = "aRmageDdOn!";
+
+                Assert.IsTrue(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
         }
 
-        [TestMethod()]
-        [DisplayName("Comparison of the same strings: written backward")]
-        public void Test_IfComparisonOf_TheSameStrings_ButWrittenBackwards_ReturnsTrue()
+        [TestClass()]
+        public class SecondAlgorithm : StringComparisonTests
         {
-            const string secondString = "!noddegamrA";
+            [TestMethod()]
+            [DisplayName("Comparison of different strings")]
+            public void Test_IfComparisonOf_DifferentStrings_ReturnsFalse()
+            {
+                const string secondString = "Apocalypse";
 
-            Assert.IsTrue(StringComparison.CheckIfAnagrams(FirstString, secondString));
-        }
+                Assert.IsFalse(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
 
-        [TestMethod()]
-        [DisplayName("Comparison of the same strings: rearranged letters")]
-        public void Test_IfComparisonOf_TheSameStrings_ButWithRearrangedLetters_ReturnsTrue()
-        {
-            const string secondString = "dnarde!mAog";
+            [TestMethod()]
+            [DisplayName("Comparison of the same strings: written backward")]
+            public void Test_IfComparisonOf_TheSameStrings_ButWrittenBackwards_ReturnsTrue()
+            {
+                const string secondString = "!noddegamrA";
 
-            Assert.IsTrue(StringComparison.CheckIfAnagrams(FirstString, secondString));
-        }
+                Assert.IsTrue(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
 
-        [TestMethod()]
-        [DisplayName("Comparison of the same strings: case insensitive")]
-        public void Test_IfComparisonOf_TheSameStrings_ButWithDifferentCaseSensitiveLetters_ReturnsTrue()
-        {
-            const string secondString = "aRmageDdOn!";
+            [TestMethod()]
+            [DisplayName("Comparison of the same strings: rearranged letters")]
+            public void Test_IfComparisonOf_TheSameStrings_ButWithRearrangedLetters_ReturnsTrue()
+            {
+                const string secondString = "dnarde!mAog";
 
-            Assert.IsTrue(StringComparison.CheckIfAnagrams(FirstString, secondString));
+                Assert.IsTrue(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
+
+            [TestMethod()]
+            [DisplayName("Comparison of the same strings: case insensitive")]
+            public void Test_IfComparisonOf_TheSameStrings_ButWithDifferentCaseSensitiveLetters_ReturnsTrue()
+            {
+                const string secondString = "aRmageDdOn!";
+
+                Assert.IsTrue(StringComparison.CheckIfAnagrams1(FirstString, secondString));
+            }
         }
     }
 }
